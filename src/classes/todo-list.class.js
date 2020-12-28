@@ -6,18 +6,20 @@ export class TodoList {
 
     constructor() {
 
-        this.todos = []; //Generaramos un array vacio
+        this.cargarLocalStorage(); //Generaramos un array vacio
 
     }
 
     nuevoTodo(todo) {
 
         this.todos.push(todo); //Agrega una tarea al array todos
+        this.guardarLocalStorage();
     }
 
     eliminarTodo(id) {
 
         this.todos = this.todos.filter(todo => todo.id != id);
+        this.guardarLocalStorage();
 
     }
 
@@ -26,7 +28,8 @@ export class TodoList {
         for (const todo of this.todos) {
 
             if (todo.id == id) {
-                todo.complentado = !todo.complentado;
+                todo.completado = !todo.completado;
+                this.guardarLocalStorage();
                 break;
             }
         }
@@ -36,6 +39,19 @@ export class TodoList {
     eliminarCompletado() {
 
         this.todos = this.todos.filter(todo => !todo.completado);
+        this.guardarLocalStorage();
+
+    }
+
+    guardarLocalStorage() {
+        localStorage.setItem('todo', JSON.stringify(this.todos));
+
+    }
+
+    cargarLocalStorage() {
+
+        this.todos = (localStorage.getItem('todo')) ? JSON.parse(localStorage.getItem('todo')) : [];
+
 
     }
 }
