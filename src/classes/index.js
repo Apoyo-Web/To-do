@@ -1,5 +1,6 @@
 import {
-    Todo
+    Todo,
+
 } from './todo.class';
 
 import {
@@ -9,5 +10,6 @@ import {
 
 export {
     Todo,
-    TodoList
+    TodoList,
+
 };
