@@ -1,3 +1,7 @@
+import {
+    Todo
+} from ".";
+
 export class TodoList {
 
     constructor() {
@@ -30,6 +34,8 @@ export class TodoList {
     }
 
     eliminarCompletado() {
+
+        this.todos = this.todos.filter(todo => !todo.completado);
 
     }
 }
