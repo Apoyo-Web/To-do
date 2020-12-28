@@ -13,9 +13,19 @@ export class TodoList {
 
     eliminarTodo(id) {
 
+        this.todos = this.todos.filter(todo => todo.id != id);
+
     }
 
-    marcaComplentado(id) {
+    marcaCompletado(id) {
+
+        for (const todo of this.todos) {
+
+            if (todo.id == id) {
+                todo.complentado = !todo.complentado;
+                break;
+            }
+        }
 
     }
 

@@ -1,6 +1,15 @@
 //referencias
 
+import {
+    Todo
+} from '../classes';
+
+import {
+    todoList
+} from '../index';
+
 const divTodoList = document.querySelector('.todo-list');
+const txtInpunt = document.querySelector('.new-todo');
 
 
 export const crearHtmlTodo = (todo) => {
@@ -24,3 +33,37 @@ export const crearHtmlTodo = (todo) => {
 
     return div.firstElementChild;
 }
+
+txtInpunt.addEventListener('keyup', (event) => {
+    if (event.keyCode === 13 && txtInpunt.value.length > 0) {
+        const nuevoTodo = new Todo(txtInpunt.value);
+        todoList.nuevoTodo(nuevoTodo);
+        crearHtmlTodo(nuevoTodo);
+        txtInpunt.value = "";
+    };
+});
+
+
+divTodoList.addEventListener('click', (event) => {
+
+    const nombreElemento = event.target.localName;
+    const todoElemento = event.target.parentElement.parentElement;
+    const todoId = todoElemento.getAttribute('data-id');
+
+
+
+    if (nombreElemento.includes('input')) {
+        todoList.marcaCompletado(todoId);
+        todoElemento.classList.toggle('completed');
+    } else if (nombreElemento.includes('button')) {
+
+        {
+            todoList.eliminarTodo(todoId);
+            divTodoList.removeChild(todoElemento);
+        }
+    }
+
+
+
+
+})
